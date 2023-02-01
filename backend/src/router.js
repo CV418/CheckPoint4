@@ -1,13 +1,28 @@
 const express = require("express");
+require("dotenv").config();
 
 const router = express.Router();
 
-const itemControllers = require("./controllers/itemControllers");
+const {
+  getUserByEmailWithPasswordAndPassToNext,
+  verifyToken,
+} = require("./middleware/auth");
+const userControllers = require("./controllers/userControllers");
+const { verifyPassword } = require("./controllers/userControllers");
+const bienControllers = require("./controllers/bienControllers");
 
-router.get("/items", itemControllers.browse);
-router.get("/items/:id", itemControllers.read);
-router.put("/items/:id", itemControllers.edit);
-router.post("/items", itemControllers.add);
-router.delete("/items/:id", itemControllers.destroy);
+// <-- USER -->
+router.post("/register", userControllers.register);
+router.post(
+  "/login",
+  getUserByEmailWithPasswordAndPassToNext,
+  verifyPassword,
+  verifyToken
+);
+router.get("/user/:id", userControllers.read);
+
+// <-- BIEN IMMO -->
+router.post("/bien", bienControllers.add);
+router.get("/bien/:id", bienControllers.selectBien);
 
 module.exports = router;

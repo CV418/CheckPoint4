@@ -2,22 +2,22 @@
 /* eslint-disable react/button-has-type */
 /* eslint-disable no-unused-vars */
 import axios from "axios";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { BienContext } from "../Context/bienContext";
 import { AuthContext } from "../Context/authContext";
+import Header from "./Header";
 
 export default function AjoutBien() {
   const [error, setError] = useState("");
   const { userData, userToken } = useContext(AuthContext);
-
+  const { setAllBien, allBien } = useContext(BienContext);
   const navigate = useNavigate();
 
   const onSubmit = (e) => {
     e.preventDefault();
-
     const formData = new FormData(e.target);
     const updatedData = Object.fromEntries(formData);
-
     axios
       .post(`http://localhost:8001/bien`, {
         updatedData,
@@ -25,13 +25,17 @@ export default function AjoutBien() {
           Authorization: `Bearer ${userToken}`,
         },
       })
-      .then(() => navigate(`/profil/${userData}`))
+      .then((response) => {
+        setAllBien([...allBien, response.data]);
+        navigate(`/profil/${userData}`);
+      })
       .catch(() => {
         setError("Une erreur est survenue");
       });
   };
   return (
     <div>
+      <Header />
       <div className="flex items-center justify-center p-12 min-w-full">
         <div className="mx-auto w-full max-w-full bg-white">
           <h1 className="mb-5 block text-2xl font-semibold text-[#07074D]">

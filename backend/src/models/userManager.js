@@ -5,7 +5,6 @@ class UserManager extends AbstractManager {
     super({ table: "user" });
   }
 
-  // Insertion dans la database utilisée pour register
   insert(user) {
     const {
       lastName,
@@ -32,6 +31,29 @@ class UserManager extends AbstractManager {
     return this.connection.query(
       `SELECT * FROM ${this.table} WHERE email = ? `,
       [email]
+    );
+  }
+
+  update(user) {
+    const {
+      id,
+      lastName,
+      firstName,
+      adress,
+      postalCode,
+      city,
+      email,
+      hashedPassword,
+    } = user;
+    return this.connection.query(
+      `UPDATE ${this.table} SET lastName = ?,
+        firstName = ?,
+        adress = ?,
+        postalCode = ?,
+        city = ?,
+        email = ?,
+        hashedPassword = ? WHERE id = ?`,
+      [lastName, firstName, adress, postalCode, city, email, hashedPassword, id]
     );
   }
 }

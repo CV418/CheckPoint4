@@ -27,7 +27,7 @@ export default function Delete() {
         Authorization: `Bearer ${userToken}`,
       },
     });
-    setAllBien(response.data);
+    setAllBien([...allBien, response.data]);
     setIsLoading(false);
   };
 

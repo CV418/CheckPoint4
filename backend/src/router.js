@@ -10,6 +10,7 @@ const {
 const userControllers = require("./controllers/userControllers");
 const { verifyPassword } = require("./controllers/userControllers");
 const bienControllers = require("./controllers/bienControllers");
+// const callapi = require("./controllers/callapi");
 
 // <-- USER -->
 router.post("/register", userControllers.register);
@@ -20,11 +21,15 @@ router.post(
   verifyToken
 );
 router.get("/user/:id", userControllers.read);
+router.put("/user/:id", userControllers.edit);
 
 // <-- BIEN IMMO -->
 router.post("/bien", bienControllers.add);
 router.get("/allBien", bienControllers.selectBien);
 router.get("/bien/:id", bienControllers.read);
 router.delete("/bien/:id", verifyToken, bienControllers.deleteBien);
+
+// // <--API EXTERNE -->
+// router.get("/api/login", callapi.browse);
 
 module.exports = router;

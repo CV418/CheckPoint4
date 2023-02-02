@@ -5,6 +5,7 @@ import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Context/authContext";
+import Header from "./Header";
 
 export default function Login() {
   const { setUser } = useContext(AuthContext);
@@ -52,8 +53,8 @@ export default function Login() {
         <div className="mx-auto w-full max-w-sm lg:w-96">
           <div>
             <img
-              className="h-12 w-auto"
-              src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
+              className="h-[7em] w-auto"
+              src="https://res.cloudinary.com/dhudn6li6/image/upload/v1675327915/CheckPoint4/Capture_d_e%CC%81cran_2023-02-02_a%CC%80_09.18.34_av6879.png"
               alt="Workflow"
             />
             <h2 className="mt-6 text-3xl font-extrabold text-gray-900">

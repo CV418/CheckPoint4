@@ -2,6 +2,7 @@
 /* eslint-disable jsx-a11y/no-redundant-roles */
 /* eslint-disable no-shadow */
 /* eslint-disable jsx-a11y/anchor-is-valid */
+import Header from "@components/Header";
 import { Link } from "react-router-dom";
 
 const perks = [
@@ -37,6 +38,7 @@ const perks = [
 export default function HomePage() {
   return (
     <main>
+      <Header />
       {/* Hero section */}
       <div className="relative">
         {/* Background image and overlap */}

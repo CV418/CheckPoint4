@@ -6,6 +6,7 @@ import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { AuthContext } from "../Context/authContext";
+import Header from "./Header";
 
 export default function BienDetails() {
   const { userToken } = useContext(AuthContext);
@@ -37,6 +38,7 @@ export default function BienDetails() {
     <p>Chargement </p>
   ) : (
     <div className="bg-white min-w-[80vh]">
+      <Header />
       <main className="pt-10 sm:pt-16">
         <nav aria-label="Breadcrumb">
           <ol

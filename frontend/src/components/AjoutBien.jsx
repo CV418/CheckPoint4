@@ -8,7 +8,7 @@ import { AuthContext } from "../Context/authContext";
 
 export default function AjoutBien() {
   const [error, setError] = useState("");
-  const { userData } = useContext(AuthContext);
+  const { userData, userToken } = useContext(AuthContext);
 
   const navigate = useNavigate();
 
@@ -21,13 +21,15 @@ export default function AjoutBien() {
     axios
       .post(`http://localhost:8001/bien`, {
         updatedData,
+        headers: {
+          Authorization: `Bearer ${userToken}`,
+        },
       })
       .then(() => navigate(`/profil/${userData}`))
       .catch(() => {
         setError("Une erreur est survenue");
       });
   };
-
   return (
     <div>
       <div className="flex items-center justify-center p-12 min-w-full">
@@ -40,6 +42,21 @@ export default function AjoutBien() {
             className="py-6 px-9 w-full"
             action="https://formbold.com/s/FORM_ID"
           >
+            <div className="hidden">
+              <label
+                htmlFor="idUser"
+                className="mb-3 block text-base font-medium text-[#07074D]"
+              >
+                {userData}
+              </label>
+              <input
+                type="text"
+                name="idUser"
+                id="idUser"
+                value={userData}
+                className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+              />
+            </div>
             <div className="mb-5">
               <label
                 htmlFor="title"
@@ -49,9 +66,24 @@ export default function AjoutBien() {
               </label>
               <input
                 type="text"
-                name="title"
+                name="titleBien"
                 id="title"
                 placeholder="Titre"
+                className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+              />
+            </div>
+            <div className="mb-5">
+              <label
+                htmlFor="venteLocation"
+                className="mb-3 block text-base font-medium text-[#07074D]"
+              >
+                Vente ou location ?
+              </label>
+              <input
+                type="text"
+                name="venteLocation"
+                id="venteLocation"
+                placeholder="Vente ou Location"
                 className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
               />
             </div>
@@ -158,21 +190,6 @@ export default function AjoutBien() {
                 id="description"
                 placeholder="Description"
                 className="w-full  h-[10em] overflow-y-auto rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
-              />
-            </div>
-            <div className="mb-5">
-              <label
-                htmlFor="venteLocation"
-                className="mb-3 block text-base font-medium text-[#07074D]"
-              >
-                Vente ou location ?
-              </label>
-              <input
-                type="text"
-                name="venteLocation"
-                id="venteLocation"
-                placeholder="Vente ou Location"
-                className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
               />
             </div>
 

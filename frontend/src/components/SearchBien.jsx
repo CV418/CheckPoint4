@@ -1,7 +1,8 @@
-import { Fragment, useState } from "react";
+import { Fragment, useContext, useState } from "react";
 import { Dialog, Disclosure, Transition } from "@headlessui/react";
 import { XIcon } from "@heroicons/react/outline";
 import { ChevronDownIcon, PlusSmIcon } from "@heroicons/react/solid";
+import { BienContext } from "../Context/bienContext";
 
 const filters = [
   {
@@ -47,6 +48,7 @@ function classNames(...classes) {
 
 export default function SearchBien() {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+  const { allBien } = useContext(BienContext);
 
   return (
     <div className="bg-white">
@@ -162,8 +164,8 @@ export default function SearchBien() {
             </p>
           </div>
 
-          <div className="pt-12 lg:grid lg:grid-cols-3 lg:gap-x-8 xl:grid-cols-4">
-            <aside>
+          <div className="pt-[2em] lg:grid lg:grid-cols-2 lg:gap-x-1 xl:grid-cols-2 lg:space-x-[-20em]">
+            <aside className="w-2">
               <h2 className="sr-only">Filtres</h2>
 
               <button
@@ -221,25 +223,32 @@ export default function SearchBien() {
             </aside>
 
             {/* Product grid */}
-            <div className="mt-6 lg:mt-0 lg:col-span-2 xl:col-span-3">
-              <div className="bg-white">
-                <div className="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
-                  <h2 className="sr-only">Products</h2>
-
-                  <div className="grid grid-cols-1 gap-y-10 sm:grid-cols-2 gap-x-3 lg:grid-cols-2 xl:grid-cols-2 xl:gap-x-8">
-                    {/* <div className="w-full aspect-w-1 aspect-h-1 bg-gray-200 rounded-lg overflow-hidden xl:aspect-w-7 xl:aspect-h-8">
-                          <img
-                            src={product.imageSrc}
-                            alt={product.imageAlt}
-                            className="w-full h-full object-center object-cover group-hover:opacity-75"
-                          />
-                        </div> */}
-                    <h3 className="mt-4 text-sm text-gray-700">coucou</h3>
-                    <p className="mt-1 text-lg font-medium text-gray-900">ok</p>
-                  </div>
+            <div className="bg-white">
+              <div className="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
+                <div className=" grid grid-cols-2 gap-x-2 gap-y-10 sm:gap-x-4 md:grid-cols-2 md:gap-y-0 lg:gap-x-2">
+                  {allBien.map((product) => (
+                    <div key={product.id} className="group relative">
+                      <div className="w-full h-56 bg-gray-200 rounded-md overflow-hidden group-hover:opacity-75 lg:h-72 xl:h-80">
+                        <img
+                          src="https://res.cloudinary.com/dhudn6li6/image/upload/v1675287024/CheckPoint4/modele-de-maison-contemporaine_jx4ygg.jpg"
+                          alt="ok"
+                          className="w-full h-full object-center object-cover"
+                        />
+                      </div>
+                      <h3 className="mt-4 text-sm text-gray-700">
+                        <span className="absolute inset-0" />
+                        {product.titleBien}
+                      </h3>
+                      <p className="mt-1 text-sm text-gray-500">
+                        {product.type}
+                      </p>
+                      <p className="mt-1 text-sm font-medium text-gray-900">
+                        {product.prix}
+                      </p>
+                    </div>
+                  ))}
                 </div>
               </div>
-              <div />
             </div>
           </div>
         </main>

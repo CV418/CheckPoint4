@@ -5,9 +5,17 @@ class BienManager extends AbstractManager {
     super({ table: "bien" });
   }
 
-  insert(biens) {
+  find(bien) {
+    return this.connection.query(
+      `SELECT * FROM ${this.table} WHERE bien.id = ?`,
+      [bien]
+    );
+  }
+
+  insert(bien) {
     const {
-      title,
+      idUser,
+      titleBien,
       type,
       piece,
       exterieur,
@@ -16,10 +24,11 @@ class BienManager extends AbstractManager {
       ville,
       description,
       venteLocation,
-    } = biens;
+    } = bien;
     return this.connection.query(
       `INSERT INTO ${this.table} (
-        title,
+        idUser,
+        titleBien,
         type,
         piece,
         exterieur,
@@ -28,9 +37,10 @@ class BienManager extends AbstractManager {
         ville,
         description,
         venteLocation
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
       [
-        title,
+        idUser,
+        titleBien,
         type,
         piece,
         exterieur,
@@ -43,15 +53,14 @@ class BienManager extends AbstractManager {
     );
   }
 
-  selectAllBien(id, userToken) {
-    return this.connection.query(
-      `SELECT bien.*, user.*
-      FROM bien
-      JOIN user ON bien.idUser = user.id
-      JOIN bienUser ON bienUser.idBien = bien.id
-      WHERE user.id = bien.idUser`,
-      [id, userToken]
-    );
+  selectAllBien() {
+    return this.connection.query(`SELECT * FROM ${this.table}`);
+  }
+
+  deleteBien(id) {
+    return this.connection.query(`DELETE FROM ${this.table} WHERE id = ?`, [
+      id,
+    ]);
   }
 }
 

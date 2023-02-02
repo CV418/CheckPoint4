@@ -122,7 +122,7 @@ export default function HomePage() {
               </div>
             </div>
             <div
-              key="Achetez Louez"
+              key="Vendez Louez"
               className="group relative h-96 bg-white rounded-lg shadow-xl sm:h-auto sm:aspect-w-4 sm:aspect-h-5"
             >
               <div>
@@ -153,7 +153,7 @@ export default function HomePage() {
               </div>
             </div>
             <div
-              key="Achetez Louez"
+              key="Contactez nous"
               className="group relative h-96 bg-white rounded-lg shadow-xl sm:h-auto sm:aspect-w-4 sm:aspect-h-5"
             >
               <div>

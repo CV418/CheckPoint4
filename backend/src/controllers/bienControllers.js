@@ -1,5 +1,23 @@
 const models = require("../models");
 
+const handleError = (res, error) => {
+  console.error(error);
+  res.status(500);
+};
+
+const read = (req, res) => {
+  models.bien
+    .find(req.params.id)
+    .then(([rows]) => {
+      if (rows[0] == null) {
+        res.sendStatus(404);
+      } else {
+        res.send(rows[0]);
+      }
+    })
+    .catch((err) => handleError(res, err));
+};
+
 const browse = (req, res) => {
   const bien = req.query;
   models.bien
@@ -15,7 +33,6 @@ const browse = (req, res) => {
 
 const add = (req, res) => {
   const bien = req.body.updatedData;
-
   models.bien
     .insert(bien)
     .then(([result]) => {
@@ -50,7 +67,6 @@ const edit = (req, res) => {
 const selectBien = (req, res) => {
   const id = parseInt(req.params.id, 10);
   const hasToken = req.payload ? 1 : null;
-
   models.bien
     .selectAllBien(id, hasToken)
     .then(([result]) => {
@@ -66,9 +82,26 @@ const selectBien = (req, res) => {
     });
 };
 
+const deleteBien = (req, res) => {
+  const id = parseInt(req.params.id, 10);
+
+  models.bien
+    .delete(id)
+    .then(([result]) => {
+      if (result.affectedRows === 0) {
+        res.sendStatus(404);
+      } else {
+        res.status(200).send("deleted");
+      }
+    })
+    .catch((err) => handleError(res, err));
+};
+
 module.exports = {
   browse,
   add,
   edit,
   selectBien,
+  deleteBien,
+  read,
 };

@@ -7,6 +7,7 @@ export const AuthContext = createContext();
 export function AuthContextProvider({ children }) {
   const [userToken, setUserToken] = useState(Cookies.get("userToken") || null);
   const [userData, setUserData] = useState(Cookies.get("id") || "");
+  const [userEmail, setUserEmail] = useState(Cookies.get("email") || "");
 
   const setUser = useCallback((data) => {
     if (data.token) {
@@ -16,17 +17,21 @@ export function AuthContextProvider({ children }) {
     }
     setUserToken(data.token);
     setUserData(data.user.id);
+    setUserEmail(data.user.email);
 
     Cookies.set("id", data.user.id);
+    Cookies.set("email", data.user.email);
   }, []);
   const removeCookies = () => {
     Cookies.remove("userToken");
     Cookies.remove("id");
+    Cookies.remove("email");
   };
   const logout = () => {
     setUserData();
     removeCookies();
     setUserToken(null);
+    setUserEmail(null);
     setUser(null);
   };
 
@@ -38,8 +43,19 @@ export function AuthContextProvider({ children }) {
       setUserToken,
       userData,
       setUserData,
+      userEmail,
+      setUserEmail,
     }),
-    [userToken, logout, setUserToken, setUser, userData, setUserData]
+    [
+      userToken,
+      logout,
+      setUserToken,
+      setUser,
+      userData,
+      setUserData,
+      userEmail,
+      setUserEmail,
+    ]
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

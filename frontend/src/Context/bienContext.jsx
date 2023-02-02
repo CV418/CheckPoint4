@@ -12,11 +12,12 @@ export function BienContextProvider({ children }) {
   const { id } = useParams();
   const [bien, setBien] = useState();
   const [allBien, setAllBien] = useState();
+  const [allBienId, setAllBienId] = useState();
 
   useEffect(() => {
     const postBien = async () => {
       try {
-        const response = await axios.post(`http://localhost:8001/bien`, {
+        const response = await axios.post(`http://localhost:8001/addbien`, {
           headers: {
             Authorization: `Bearer ${userToken}`,
           },
@@ -27,22 +28,62 @@ export function BienContextProvider({ children }) {
       }
     };
     postBien();
-  }, [id]);
+  }, []);
+
+  const handleClickDeleteBien = async () => {
+    try {
+      await axios.delete(`http://localhost:8001/bien/${id}`, {
+        headers: {
+          Authorization: `Bearer ${userToken}`,
+        },
+      });
+    } catch (error) {
+      console.error(error.message);
+    }
+    // const response = await axios.get(`http://localhost:8001/bien`, {
+    //   headers: {
+    //     Authorization: `Bearer ${userToken}`,
+    //   },
+    // });
+    // setAllBien(response.data);
+  };
 
   useEffect(() => {
-    const getBien = async () => {
+    const getBien = () => {
       try {
-        const response = await axios.get(`http://localhost:8001/bien`, {
-          headers: {
-            Authorization: `Bearer ${userToken}`,
-          },
-        });
-        setAllBien(response.data);
+        axios
+          .get(`http://localhost:8001/allBien`, {
+            headers: {
+              Authorization: `Bearer ${userToken}`,
+            },
+          })
+          .then((res) => {
+            setAllBien(res.data);
+          });
       } catch (error) {
         console.error(error.message);
       }
     };
     getBien();
+  }, []);
+
+  useEffect(() => {
+    const getBienId = () => {
+      try {
+        axios
+          .get(`http://localhost:8001/bien/${id}`, {
+            headers: {
+              Authorization: `Bearer ${userToken}`,
+            },
+          })
+          .then((res) => {
+            setAllBienId(res.data);
+          });
+      } catch (error) {
+        console.error(error.message);
+      }
+    };
+    getBienId();
   }, [id]);
 
   return (
@@ -52,6 +93,9 @@ export function BienContextProvider({ children }) {
         setBien,
         setAllBien,
         allBien,
+        handleClickDeleteBien,
+        allBienId,
+        setAllBienId,
       }}
     >
       {children}

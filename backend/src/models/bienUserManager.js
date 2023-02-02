@@ -12,7 +12,7 @@ class BienManager extends AbstractManager {
     );
   }
 
-  deleteFav(idBien) {
+  deleteBien(idBien) {
     return this.connection.query(`delete from ${this.table} where idBien = ?`, [
       idBien,
     ]);

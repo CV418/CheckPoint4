@@ -57,10 +57,13 @@ class BienManager extends AbstractManager {
     return this.connection.query(`SELECT * FROM ${this.table}`);
   }
 
-  deleteBien(id) {
-    return this.connection.query(`DELETE FROM ${this.table} WHERE id = ?`, [
-      id,
-    ]);
+  deletebiens(id, hasToken) {
+    if (hasToken) {
+      return this.connection.query(`DELETE FROM ${this.table} WHERE id = ?`, [
+        id,
+      ]);
+    }
+    return { error: "non" };
   }
 }
 

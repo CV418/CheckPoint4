@@ -84,9 +84,9 @@ const selectBien = (req, res) => {
 
 const deleteBien = (req, res) => {
   const id = parseInt(req.params.id, 10);
-
+  const hasToken = req.payload ? 1 : null;
   models.bien
-    .delete(id)
+    .deletebiens(id, hasToken)
     .then(([result]) => {
       if (result.affectedRows === 0) {
         res.sendStatus(404);

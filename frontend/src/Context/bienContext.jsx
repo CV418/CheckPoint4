@@ -17,7 +17,7 @@ export function BienContextProvider({ children }) {
   useEffect(() => {
     const postBien = async () => {
       try {
-        const response = await axios.post(`http://localhost:8001/addbien`, {
+        const response = await axios.post(`http://localhost:8001/bien`, {
           headers: {
             Authorization: `Bearer ${userToken}`,
           },
@@ -29,24 +29,6 @@ export function BienContextProvider({ children }) {
     };
     postBien();
   }, []);
-
-  const handleClickDeleteBien = async () => {
-    try {
-      await axios.delete(`http://localhost:8001/bien/${id}`, {
-        headers: {
-          Authorization: `Bearer ${userToken}`,
-        },
-      });
-    } catch (error) {
-      console.error(error.message);
-    }
-    // const response = await axios.get(`http://localhost:8001/bien`, {
-    //   headers: {
-    //     Authorization: `Bearer ${userToken}`,
-    //   },
-    // });
-    // setAllBien(response.data);
-  };
 
   useEffect(() => {
     const getBien = () => {
@@ -93,7 +75,6 @@ export function BienContextProvider({ children }) {
         setBien,
         setAllBien,
         allBien,
-        handleClickDeleteBien,
         allBienId,
         setAllBienId,
       }}

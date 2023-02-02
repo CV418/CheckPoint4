@@ -22,9 +22,9 @@ router.post(
 router.get("/user/:id", userControllers.read);
 
 // <-- BIEN IMMO -->
-router.post("/addbien", bienControllers.add);
+router.post("/bien", bienControllers.add);
 router.get("/allBien", bienControllers.selectBien);
 router.get("/bien/:id", bienControllers.read);
-router.delete("/bien/:id", bienControllers.deleteBien);
+router.delete("/bien/:id", verifyToken, bienControllers.deleteBien);
 
 module.exports = router;

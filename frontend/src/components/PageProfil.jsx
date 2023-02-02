@@ -7,6 +7,7 @@ import { MailIcon, PhoneIcon } from "@heroicons/react/solid";
 import axios from "axios";
 import { AuthContext } from "../Context/authContext";
 import { BienContext } from "../Context/bienContext";
+import Delete from "./Delete";
 
 const profile = {
   firstName: "Ricardo Cooper",
@@ -29,7 +30,7 @@ const profile = {
 
 export default function PageProfil() {
   const { logout, userData, userToken } = useContext(AuthContext);
-  const { allBien, handleClickDeleteBien } = useContext(BienContext);
+  const { allBien } = useContext(BienContext);
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
 
@@ -242,15 +243,7 @@ export default function PageProfil() {
                               </h2>
                               <p>{bienUser.description}</p>
                             </div>
-                            <button
-                              key={bienUser.id}
-                              type="button"
-                              onClick={() =>
-                                handleClickDeleteBien(parseInt(bienUser.id, 10))
-                              }
-                            >
-                              DELETE{" "}
-                            </button>
+                            <Delete />
                           </li>
                         ))}
                   </ul>

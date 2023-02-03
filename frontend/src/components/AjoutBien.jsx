@@ -11,7 +11,7 @@ import Header from "./Header";
 export default function AjoutBien() {
   const [error, setError] = useState("");
   const { userData, userToken } = useContext(AuthContext);
-  const { setAllBien, allBien } = useContext(BienContext);
+  const { refresh, setRefresh } = useContext(BienContext);
   const navigate = useNavigate();
 
   const onSubmit = (e) => {
@@ -26,7 +26,7 @@ export default function AjoutBien() {
         },
       })
       .then((response) => {
-        setAllBien([...allBien, response.data]);
+        setRefresh(!refresh);
         navigate(`/profil/${userData}`);
       })
       .catch(() => {

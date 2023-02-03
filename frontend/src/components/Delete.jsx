@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import axios from "axios";
 import { useContext, useState } from "react";
@@ -5,10 +6,9 @@ import { BienContext } from "../Context/bienContext";
 import { AuthContext } from "../Context/authContext";
 
 export default function Delete() {
-  const [isLoading, setIsLoading] = useState(true);
-
   const { userToken } = useContext(AuthContext);
   const { allBien, setAllBien } = useContext(BienContext);
+  const { refresh, setRefresh } = useContext(BienContext);
 
   const idBien = allBien.find((a) => a.id);
 
@@ -22,13 +22,7 @@ export default function Delete() {
     } catch (error) {
       console.error(error.message);
     }
-    const response = await axios.get(`http://localhost:8001/bien`, {
-      headers: {
-        Authorization: `Bearer ${userToken}`,
-      },
-    });
-    setAllBien([...allBien, response.data]);
-    setIsLoading(false);
+    setRefresh(!refresh);
   };
 
   return (

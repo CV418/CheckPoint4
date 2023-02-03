@@ -13,6 +13,7 @@ export function BienContextProvider({ children }) {
   const [bien, setBien] = useState();
   const [allBien, setAllBien] = useState();
   const [allBienId, setAllBienId] = useState();
+  const [refresh, setRefresh] = useState(false);
 
   useEffect(() => {
     const postBien = async () => {
@@ -28,7 +29,7 @@ export function BienContextProvider({ children }) {
       }
     };
     postBien();
-  }, []);
+  }, [refresh]);
 
   useEffect(() => {
     const getBien = () => {
@@ -47,7 +48,7 @@ export function BienContextProvider({ children }) {
       }
     };
     getBien();
-  }, []);
+  }, [refresh]);
 
   useEffect(() => {
     const getBienId = () => {
@@ -77,6 +78,8 @@ export function BienContextProvider({ children }) {
         allBien,
         allBienId,
         setAllBienId,
+        setRefresh,
+        refresh,
       }}
     >
       {children}

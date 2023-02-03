@@ -4,41 +4,34 @@ import { XIcon } from "@heroicons/react/outline";
 import { ChevronDownIcon, PlusSmIcon } from "@heroicons/react/solid";
 import { Link } from "react-router-dom";
 import { BienContext } from "../Context/bienContext";
+import Header from "./Header";
 
 const filters = [
   {
-    id: "color",
-    name: "Color",
+    id: "Pièce",
+    name: "Pièce",
     options: [
-      { value: "white", label: "White" },
-      { value: "beige", label: "Beige" },
-      { value: "blue", label: "Blue" },
-      { value: "brown", label: "Brown" },
-      { value: "green", label: "Green" },
-      { value: "purple", label: "Purple" },
+      { value: "1-2", label: "1-2" },
+      { value: "2-3", label: "2-3" },
+      { value: "3-4", label: "3-4" },
+      { value: "4-5", label: "4-5" },
+      { value: "5+", label: "5+" },
     ],
   },
   {
-    id: "category",
-    name: "Category",
+    id: "Type",
+    name: "Type",
     options: [
-      { value: "new-arrivals", label: "All New Arrivals" },
-      { value: "tees", label: "Tees" },
-      { value: "crewnecks", label: "Crewnecks" },
-      { value: "sweatshirts", label: "Sweatshirts" },
-      { value: "pants-shorts", label: "Pants & Shorts" },
+      { value: "Maison", label: "Maison" },
+      { value: "Appartement", label: "Appartement" },
     ],
   },
   {
-    id: "sizes",
-    name: "Sizes",
+    id: "Vente / Location",
+    name: "Vente / Location",
     options: [
-      { value: "xs", label: "XS" },
-      { value: "s", label: "S" },
-      { value: "m", label: "M" },
-      { value: "l", label: "L" },
-      { value: "xl", label: "XL" },
-      { value: "2xl", label: "2XL" },
+      { value: "Vente", label: "Vente" },
+      { value: "Location", label: "Location" },
     ],
   },
 ];
@@ -53,6 +46,7 @@ export default function SearchBien() {
 
   return (
     <div className="bg-white">
+      <Header />
       <div>
         {/* Mobile filter dialog */}
         <Transition.Root show={mobileFiltersOpen} as={Fragment}>
@@ -156,7 +150,7 @@ export default function SearchBien() {
         </Transition.Root>
 
         <main className="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
-          <div className="border-b border-gray-200 pb-10">
+          <div className="border-b border-gray-200 pb-10 mt-[-4em]">
             <h1 className="text-4xl font-extrabold tracking-tight text-gray-900">
               Biens disponibles
             </h1>
@@ -226,10 +220,10 @@ export default function SearchBien() {
             {/* Product grid */}
             <div className="bg-white">
               <div className="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
-                <div className=" grid grid-cols-2 gap-x-2 gap-y-10 sm:gap-x-4 md:grid-cols-2 md:gap-y-0 lg:gap-x-2">
+                <div className=" grid grid-cols-2 gap-x-2 gap-y-10 sm:gap-x-4 md:grid-cols-2 md:gap-y-0 lg:gap-x-2 mt-[-5em]">
                   {allBien &&
                     allBien.map((product) => (
-                      <div className="group relative">
+                      <div className="group relative mb-6">
                         <Link to={`/biendetails/${product.id}`}>
                           <div
                             key={product.id}
@@ -249,8 +243,14 @@ export default function SearchBien() {
                         <p className="mt-1 text-sm text-gray-500">
                           {product.type}
                         </p>
-                        <p className="mt-1 text-sm font-medium text-gray-900">
+                        <p className="mt-1 text-sm text-gray-500">
                           {product.prix}
+                        </p>
+                        <p className="mt-1 text-sm text-gray-500">
+                          {product.piece} pièces
+                        </p>
+                        <p className="mt-1 text-sm text-gray-500">
+                          {product.venteLocation}
                         </p>
                       </div>
                     ))}

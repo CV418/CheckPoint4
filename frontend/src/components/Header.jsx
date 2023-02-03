@@ -1,20 +1,44 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Disclosure, Menu } from "@headlessui/react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 import { AuthContext } from "../Context/authContext";
 
 export default function Header() {
-  const { userData } = useContext(AuthContext);
+  const { userData, userToken } = useContext(AuthContext);
+  const [api, setApi] = useState();
+  const [isLoading, setIsLoading] = useState(true);
 
-  return (
+  useEffect(() => {
+    const fetchApi = async () => {
+      try {
+        const response = await axios.get(`http://localhost:8001/api/login`, {
+          headers: {
+            Authorization: `Bearer ${userToken}`,
+          },
+        });
+        setApi(response.data);
+        setIsLoading(false);
+      } catch (error) {
+        console.error(error.message);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchApi();
+  }, []);
+
+  return isLoading ? (
+    <p>En cours de chargement </p>
+  ) : (
     <Disclosure as="nav" className="bg-white shadow ">
       <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8">
         <div className="flex justify-between h-16">
           <div className="flex px-2 lg:px-0">
             <div className="flex-shrink-0 flex items-center">
               <img
-                className="block lg:hidden h-8 w-auto"
+                className="block lg:hidden h-11 w-auto"
                 src="https://res.cloudinary.com/dhudn6li6/image/upload/v1675327915/CheckPoint4/Capture_d_e%CC%81cran_2023-02-02_a%CC%80_09.18.34_av6879.png"
                 alt="Workflow"
               />
@@ -29,6 +53,10 @@ export default function Header() {
           </div>
 
           <div className="ml-4 flex items-center">
+            <h1 className="mr-5 text-gray-500">
+              {" "}
+              Température : {api.hourly.temperature_2m[0]} °C{" "}
+            </h1>
             {/* Profile dropdown */}
             <Menu as="div" className="ml-4 relative flex-shrink-0">
               <Link to={`/profil/${userData}`}>

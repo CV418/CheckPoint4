@@ -105,14 +105,14 @@ export default function PageProfil() {
                   <Link to="/ajoutbien">
                     <button
                       type="button"
-                      className="inline-flex justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500"
+                      className="inline-flex bg-green-400 justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500"
                     >
                       <span>Ajoutez un bien</span>
                     </button>
                   </Link>
                   <button
                     type="button"
-                    className="header-button"
+                    className="header-button bg-red-400 text-gray-700 inline-flex justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500"
                     onClick={() => {
                       navigate("/");
                       logout();
@@ -166,8 +166,8 @@ export default function PageProfil() {
                 <dd className="mt-1 text-sm text-gray-900">{userInfo.email}</dd>
               </div>
               <div className="sm:col-span-2">
-                <dt className="text-sm font-medium text-gray-500">
-                  Bien immobilier
+                <dt className="text-lg font-medium text-gray-500">
+                  Vos annonces immobilière
                 </dt>
                 <dd className="mt-1 text-sm text-gray-900">
                   <ul

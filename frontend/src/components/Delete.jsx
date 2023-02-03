@@ -34,7 +34,7 @@ export default function Delete() {
   return (
     <div>
       <button
-        className="bg-red-500"
+        className="header-button ml-[25em] bg-red-400 text-gray-100 inline-flex justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500"
         type="button"
         onClick={() => handleClickDeleteBien(idBien.id)}
       >

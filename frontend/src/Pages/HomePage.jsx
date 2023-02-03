@@ -7,34 +7,31 @@ import { Link } from "react-router-dom";
 
 const perks = [
   {
-    name: "Free returns",
+    name: "",
     imageUrl:
-      "https://tailwindui.com/img/ecommerce/icons/icon-returns-light.svg",
-    description:
-      "Not what you expected? Place it back in the parcel and attach the pre-paid postage stamp.",
+      "https://res.cloudinary.com/dhudn6li6/image/upload/v1675415501/CheckPoint4/5a37e212d904a8.5091170115136117948889_t4lhli.png",
+    description: "Partenaire Apple",
   },
   {
-    name: "Same day delivery",
+    name: "",
     imageUrl:
-      "https://tailwindui.com/img/ecommerce/icons/icon-calendar-light.svg",
-    description:
-      "We offer a delivery service that has never been done before. Checkout today and receive your products within hours.",
+      "https://res.cloudinary.com/dhudn6li6/image/upload/v1675415920/CheckPoint4/kisspng-edison-tax-group-llc-paypal-computer-icons-paymen-paypal-5aca6260e32f32.3873392815232128969306_ods8dd.png",
+    description: "Paiement sécurisé",
   },
   {
-    name: "All year discount",
+    name: "",
     imageUrl:
-      "https://tailwindui.com/img/ecommerce/icons/icon-gift-card-light.svg",
-    description:
-      'Looking for a deal? You can use the code "ALLYEAR" at checkout and get money off all year round.',
+      "https://res.cloudinary.com/dhudn6li6/image/upload/v1675416060/CheckPoint4/kisspng-d3-js-react-javascript-mean-document-object-model-react-d3-library-5b84961a0d8373.8412059715354158340554_z58b9s.png",
+    description: "React",
   },
   {
-    name: "For the planet",
+    name: "",
     imageUrl:
-      "https://tailwindui.com/img/ecommerce/icons/icon-planet-light.svg",
-    description:
-      "We’ve pledged 1% of sales to the preservation and restoration of the natural environment.",
+      "https://res.cloudinary.com/dhudn6li6/image/upload/v1675416509/CheckPoint4/napoleon-bonaparte-revolutionaries-1-oz-silver-coin-1000-togrog-mongolia-2021_nwwz3o.png",
+    description: "Mon nom d'entreprise",
   },
 ];
+
 export default function HomePage() {
   return (
     <main>

@@ -3,6 +3,7 @@ import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { AuthContext } from "../Context/authContext";
+import Header from "./Header";
 
 export default function UpdateProfil() {
   const { userToken, userData } = useContext(AuthContext);
@@ -59,7 +60,8 @@ export default function UpdateProfil() {
     <p>En cours de chargement</p>
   ) : (
     <form onSubmit={onSubmit} className="space-y-8 divide-y divide-gray-200">
-      <div className="space-y-8 divide-y divide-gray-200 sm:space-y-5">
+      <Header />
+      <div className="space-y-8 divide-y divide-gray-200 sm:space-y-5 ml-20 mr-20">
         <div>
           <div>
             <h3 className="text-lg leading-6 font-medium text-gray-900">
@@ -271,7 +273,7 @@ export default function UpdateProfil() {
       </div>
 
       <div className="pt-5">
-        <div className="flex justify-end">
+        <div className="flex justify-end mr-20">
           <button
             type="button"
             className="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
